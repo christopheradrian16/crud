@@ -42,7 +42,7 @@ class Fakultas extends Lihat {
 }
 
 class Jurusan extends Fakultas {
-	//Induk yang akan di wariskan
+	//Induk yang akan diwariskan
 	public function tampiljurusan($id_jrs){
 		$sql = "SELECT nama_jurusan from jurusan where id_jurusan = '$id_jrs'";
 		$stmt = $this->db->prepare($sql);
@@ -129,15 +129,19 @@ class Mahasiswa extends Jurusan {
         $stmt->execute();
         echo "DATA BERHASIL DIUPDATE !";
     }   
-    public function tampil_cari($nim,$nama,$alamat)
+    public function tampil_cari($nim,$nama,$alamat,$id_jurusan,$id_fakultas)
     {
         if($nim!='') $a = "or mhsw_nim like '%".$nim."%' ";
         else $a = '';
         if($nama!='') $b = "or mhsw_nama like '%".$nama."%' ";
         else $b = '';        
         if($alamat!='') $c = "or mhsw_alamat like '%".$alamat."%' ";
-        else $c = ''; 
-        $sql = "SELECT * FROM tb_mhsw where mhsw_id is null $a $b $c";
+        else $c = '';
+		if($id_jurusan!='') $d = "or id_jurusan like '%".$id_jurusan."%' ";
+        else $d = '';
+		if($id_fakultas!='') $e = "or id_fakultas like '%".$id_fakultas."%' ";
+        else $e = '';		
+        $sql = "SELECT * FROM tb_mhsw where mhsw_id is null $a $b $c $d $e";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $data = [];

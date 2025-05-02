@@ -74,7 +74,7 @@ if ($vreset=="reset"){
 	$vfak ='';	
 }
  if($vcari=="cari")  {
-    $rows = $mhsw->tampil_cari($vnim,$vnama,$valamat);
+    $rows = $mhsw->tampil_cari($vnim,$vnama,$valamat,$vjrs,$vfak);
  }
 	
 	echo $mhsw::$universitas;
@@ -111,7 +111,7 @@ if ($vreset=="reset"){
 		?>
 		</select>
 	</td></tr>
-    <tr><td>FAKLUTAS</td><td>:</td><td>
+    <tr><td>FAKULTAS</td><td>:</td><td>
 		<select name="fakultas" id="fak">
 		<?php
 		if($vfak!=''){
@@ -125,12 +125,13 @@ if ($vreset=="reset"){
 			  echo "<option value=".$jrow['id_fakultas'].">$jrow[nama_fakultas]</option>";
 			}
 		}else{
+			echo "<option value=''>Pilih Fakultas</option>";
 			$fak = new Fakultas();
 			$jrows = $fak->tampil('');
 			foreach ($jrows as $jrow) {
 			  echo "<option value=".$jrow['id_fakultas'].">$jrow[nama_fakultas]</option>";
 			}			
-			echo "<option value=''>Pilih Fakultas</option>";
+			
 		}
 		?>
 		</select>	
@@ -153,7 +154,7 @@ if ($vreset=="reset"){
         <td>NAMA</td>
         <td>ALAMAT</td>
 		<td>JURUSAN</td>
-		<td>FAKLUTAS</td>
+		<td>FAKULTAS</td>
         <td>AKSI</td>
     </tr>
 
